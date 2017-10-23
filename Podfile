@@ -8,7 +8,20 @@ target 'SwiftV2ray' do
 
   # Pods for SwiftV2ray
   pod 'Swifter', '~> 1.3.3'
-  pod 'XCGLogger', '~> 5.0.1'
+  pod 'XCGLogger', '~> 6.0.1'
+  
+  post_install do |installer|
+      # Your list of targets here.
+      myTargets = ['Swifter']
+      
+      installer.pods_project.targets.each do |target|
+          if myTargets.include? target.name
+              target.build_configurations.each do |config|
+                  config.build_settings['SWIFT_VERSION'] = '3.2'
+              end
+          end
+      end
+  end
 
 end
 
