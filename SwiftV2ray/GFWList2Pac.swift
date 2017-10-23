@@ -72,14 +72,11 @@ class Updater {
             
             if var host = URL(string: domain)?.host {
                 if host.hasPrefix(".") {
-                    let index = host.index(host.startIndex, offsetBy: 1)
-                    host = host.substring(from: index)
+                    host = String(host.dropFirst())
                 } else if host.hasSuffix("/") {
-                    let index = host.index(host.endIndex, offsetBy: -1)
-                    host = host.substring(to: index)
+                    host = String(host.dropLast())
                 } else if host.hasPrefix("www.") {
-                    let index = host.index(host.startIndex, offsetBy: 4)
-                    host = host.substring(from: index)
+                    host = String(host.dropFirst(4))
                 }
                 domains[host] = 1
             }
@@ -112,15 +109,11 @@ class Updater {
                     return
             }
             
-            if mutableLine.hasPrefix("||") {
-                let fromIndex = mutableLine.index(mutableLine.startIndex, offsetBy: 2)
-                mutableLine = mutableLine.substring(from: fromIndex)
-            } else if mutableLine.hasPrefix("|") {
-                let fromIndex = mutableLine.index(mutableLine.startIndex, offsetBy: 1)
-                mutableLine = mutableLine.substring(from: fromIndex)
-            } else if mutableLine.hasPrefix(".") {
-                let fromIndex = mutableLine.index(mutableLine.startIndex, offsetBy: 1)
-                mutableLine = mutableLine.substring(from: fromIndex)
+            for symbol in ["||", "|", "."] {
+                if mutableLine.hasPrefix(symbol) {
+                    mutableLine = String(mutableLine.dropFirst(symbol.count))
+                    break
+                }
             }
             add(name: mutableLine, to: &domains)
         })

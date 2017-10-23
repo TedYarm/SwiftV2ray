@@ -18,7 +18,7 @@ let log = XCGLogger(identifier: "SwiftV2ray", includeDefaultDestinations: false)
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-    let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
+    let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     @IBOutlet weak var menuController: StatusMenuController!
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {

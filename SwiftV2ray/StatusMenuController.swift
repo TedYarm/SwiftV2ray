@@ -65,7 +65,7 @@ class StatusMenuController: NSObject, NSMenuDelegate {
     // MARK: - Actions
     
     @IBAction func enableService(_ sender: Any) {
-        let isOn = enableMenuItem.state == 1
+        let isOn = enableMenuItem.state == .on
         
         // 启用的前提是 v2ray 运行中
         socksMenuItem.isEnabled = !isOn
@@ -74,11 +74,11 @@ class StatusMenuController: NSObject, NSMenuDelegate {
         updateV2rayMenuItem.isEnabled = !isOn
         
         // Off
-        if enableMenuItem.state == 1 {
+        if enableMenuItem.state == .on {
             terminate()
             
-            socksMenuItem.state = 0
-            pacMenuItem.state = 0
+            socksMenuItem.state = .off
+            pacMenuItem.state = .off
             return
         }
         
@@ -96,18 +96,18 @@ class StatusMenuController: NSObject, NSMenuDelegate {
     
     
     @IBAction func socks(_ sender: NSMenuItem) {
-        guard sender.state != 1 else {
+        guard sender.state != .on else {
             return
         }
         proxySetting.set(.global(true, Preference.default.socksAddress, Preference.default.socksPort),
                          success: {
-                            sender.state = 1
-                            pacMenuItem.state = 0
+                            sender.state = .on
+                            pacMenuItem.state = .off
         })
     }
     
     @IBAction func pac(_ sender: NSMenuItem) {
-        guard sender.state != 1 else {
+        guard sender.state != .on else {
             return
         }
         do {
@@ -116,8 +116,8 @@ class StatusMenuController: NSObject, NSMenuDelegate {
             // 等待同意接入网络
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(delay), execute: {
                 self.proxySetting.set(.auto(true, "http://localhost:\(kPacServerPort)/proxy.pac"), success: {
-                    sender.state = 1
-                    self.socksMenuItem.state = 0
+                    sender.state = .on
+                    self.socksMenuItem.state = .off
                 })
             })
         } catch {
@@ -126,8 +126,8 @@ class StatusMenuController: NSObject, NSMenuDelegate {
     }
     
     @IBAction func settings(_ sender: Any) {
-        _ = try? NSWorkspace.shared().launchApplication(at: URL(fileURLWithPath: kPreferenceAppPath),
-                                                        options: [.default],
+        _ = try? NSWorkspace.shared.launchApplication(at: URL(fileURLWithPath: kPreferenceAppPath),
+                                                        options: [NSWorkspace.LaunchOptions.default],
                                                         configuration: [:])
     }
     
@@ -139,7 +139,7 @@ class StatusMenuController: NSObject, NSMenuDelegate {
             
             self.proxySetting.set(.none, success: {})
             self.webServer.stop()
-            self.pacMenuItem.state = 0
+            self.pacMenuItem.state = .off
             self.pac(self.pacMenuItem)
         }
     }
@@ -148,7 +148,7 @@ class StatusMenuController: NSObject, NSMenuDelegate {
         updater.updateV2rayCore { (_, errMSg) in
             if let err = errMSg {
                 log.error(err)
-            } else if self.enableMenuItem.state == 1 {
+            } else if self.enableMenuItem.state == .on {
                 self.restartV2ray()
                 self.v2rayVersionMenuItem.title = "v2ray-\(Preference.default.v2rayVersion)"
             }
@@ -168,7 +168,7 @@ extension StatusMenuController {
         if let error = error {
             log.error(error)
         } else {
-            enableMenuItem.state = 1
+            enableMenuItem.state = .on
         }
     }
     
@@ -178,13 +178,13 @@ extension StatusMenuController {
         if let error = error {
             log.error(error)
         } else {
-            enableMenuItem.state = 0
+            enableMenuItem.state = .off
         }
     }
 }
 
 extension StatusMenuController {
-    func handleConfig(notification: NSNotification) {
+    @objc func handleConfig(notification: NSNotification) {
         if notification.name.rawValue == getConfigKey {
             let url = URL(fileURLWithPath: kV2rayConfigurationPath)
             guard let data = try? Data(contentsOf: url) else {
@@ -201,7 +201,7 @@ extension StatusMenuController {
             
             do {
                 try configStr.write(toFile: kV2rayConfigurationPath, atomically: true, encoding: .utf8)
-                if enableMenuItem.state == 1 {
+                if enableMenuItem.state == .on {
                     restartV2ray()
                 }
             } catch {
