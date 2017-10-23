@@ -46,7 +46,7 @@ class ViewController: NSViewController {
     }
     
     @IBAction func toAce(_ sender: Any) {
-        NSWorkspace.shared().open(URL(string: "https://ace.c9.io/")!)
+        NSWorkspace.shared.open(URL(string: "https://ace.c9.io/")!)
     }
     @IBAction func format(_ sender: Any) {
         webView.evaluateJavaScript("beautify();", completionHandler: nil)
@@ -65,13 +65,13 @@ class ViewController: NSViewController {
             let rows = Set<Int>(annotations.map({ ($0["row"] as? Int ?? 0) + 1 }))
             alert.informativeText = "Error at line:\(rows). \nPlease check your config and apply."
             alert.addButton(withTitle: "Done")
-            alert.beginSheetModal(for: NSApplication.shared().mainWindow!, completionHandler: nil)
+            alert.beginSheetModal(for: NSApplication.shared.mainWindow!, completionHandler: nil)
         }
     }
 }
 
 extension ViewController {
-    func handleConfig(notification: NSNotification) {
+    @objc func handleConfig(notification: NSNotification) {
         guard let data = notification.userInfo?["config"] as? Data else {
             return
         }
