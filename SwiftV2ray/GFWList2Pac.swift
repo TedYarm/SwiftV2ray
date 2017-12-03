@@ -170,12 +170,24 @@ extension Updater {
                 result(false, error != nil ? error!.localizedDescription : "V2ray downloading has no destination path.")
                 return
             }
-            let tempDirectory = Bundle.main.resourcePath!
+            let appDir = Bundle.main.resourcePath!
             do {
-                let tempZipPath = tempDirectory + "/v2ray-macos.zip"
-                let tempV2ray = tempDirectory + "/TempV2ray"
+                let tempZipPath = appDir + "/v2ray-macos.zip"
+                let tempV2ray = appDir + "/TempV2ray"
+                let v2ctlPath = appDir + "/v2ctl"
+                let geoipPath = appDir + "/geoip.dat"
+                let geositePath = appDir + "/geosite.dat"
                 try FileManager.default.moveItem(atPath: fromPath, toPath: tempZipPath)
-                let shellScript = "mkdir \(tempV2ray) && unzip \(tempZipPath) -d \(tempV2ray) && cp \(tempV2ray + "/v2ray-\(version)-macos/v2ray") \(kV2rayBinaryPath) && rm -rf \(tempV2ray) \(tempZipPath)"
+                
+                let shellScript = """
+                mkdir \(tempV2ray) &&
+                unzip \(tempZipPath) -d \(tempV2ray) &&
+                cp \(tempV2ray + "/v2ray-\(version)-macos/v2ray") \(kV2rayBinaryPath) &&
+                cp \(tempV2ray + "/v2ray-\(version)-macos/v2ctl") \(v2ctlPath) &&
+                cp \(tempV2ray + "/v2ray-\(version)-macos/geoip.dat") \(geoipPath) &&
+                cp \(tempV2ray + "/v2ray-\(version)-macos/geosite.dat") \(geositePath) &&
+                rm -rf \(tempV2ray) \(tempZipPath)
+                """
                 
                 var error: NSDictionary?
                 NSAppleScript(source: "do shell script \"\(shellScript)\"")?.executeAndReturnError(&error)

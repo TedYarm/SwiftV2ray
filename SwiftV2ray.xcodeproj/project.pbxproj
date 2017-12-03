@@ -389,6 +389,9 @@
 		59C644C71F6D6D2E008581E1 /* SwiftV2ray Preference.app in Resources */ = {isa = PBXBuildFile; fileRef = 59C644C61F6D6D2E008581E1 /* SwiftV2ray Preference.app */; };
 		59C644C91F6E0D09008581E1 /* Preference.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59C644C81F6E0D09008581E1 /* Preference.plist */; };
 		59C644CF1F6E0D6B008581E1 /* Preference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C644CE1F6E0D6B008581E1 /* Preference.swift */; };
+		59E4C1D21FD40DA800D6F6B5 /* v2ctl in Resources */ = {isa = PBXBuildFile; fileRef = 59E4C1D11FD40DA800D6F6B5 /* v2ctl */; };
+		59E4C1D51FD40DCA00D6F6B5 /* geoip.dat in Resources */ = {isa = PBXBuildFile; fileRef = 59E4C1D31FD40DC900D6F6B5 /* geoip.dat */; };
+		59E4C1D61FD40DCA00D6F6B5 /* geosite.dat in Resources */ = {isa = PBXBuildFile; fileRef = 59E4C1D41FD40DC900D6F6B5 /* geosite.dat */; };
 		59E72E841F337B5A005DC25C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5917E1AE1EBB1AF5002F154E /* Main.storyboard */; };
 		E9F8060B5094BD3F3950A1C9 /* Pods_SwiftV2ray_Preference.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEA32EB36953B86503489612 /* Pods_SwiftV2ray_Preference.framework */; };
 /* End PBXBuildFile section */
@@ -781,6 +784,9 @@
 		59C644C61F6D6D2E008581E1 /* SwiftV2ray Preference.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; name = "SwiftV2ray Preference.app"; path = "Build/Products/Release/SwiftV2ray Preference.app"; sourceTree = "<group>"; };
 		59C644C81F6E0D09008581E1 /* Preference.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Preference.plist; sourceTree = "<group>"; };
 		59C644CE1F6E0D6B008581E1 /* Preference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Preference.swift; sourceTree = "<group>"; };
+		59E4C1D11FD40DA800D6F6B5 /* v2ctl */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = v2ctl; sourceTree = "<group>"; };
+		59E4C1D31FD40DC900D6F6B5 /* geoip.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = geoip.dat; path = "../../../../Downloads/v2ray-v3.0-macos/geoip.dat"; sourceTree = "<group>"; };
+		59E4C1D41FD40DC900D6F6B5 /* geosite.dat */ = {isa = PBXFileReference; lastKnownFileType = file; name = geosite.dat; path = "../../../../Downloads/v2ray-v3.0-macos/geosite.dat"; sourceTree = "<group>"; };
 		6D9B6AB1F9D45C5F0307009B /* Pods-SwiftV2ray.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftV2ray.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftV2ray/Pods-SwiftV2ray.release.xcconfig"; sourceTree = "<group>"; };
 		C11FA39834F080335938F2A9 /* Pods-SwiftV2ray Preference.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftV2ray Preference.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftV2ray Preference/Pods-SwiftV2ray Preference.debug.xcconfig"; sourceTree = "<group>"; };
 		E63964110105A50E6A372C72 /* Pods-SwiftV2ray Preference.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SwiftV2ray Preference.release.xcconfig"; path = "Pods/Target Support Files/Pods-SwiftV2ray Preference/Pods-SwiftV2ray Preference.release.xcconfig"; sourceTree = "<group>"; };
@@ -1242,6 +1248,9 @@
 		59704DE91F3726A0005BB1A3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				59E4C1D11FD40DA800D6F6B5 /* v2ctl */,
+				59E4C1D31FD40DC900D6F6B5 /* geoip.dat */,
+				59E4C1D41FD40DC900D6F6B5 /* geosite.dat */,
 				59704DED1F372BA0005BB1A3 /* pac-master.pac */,
 				59704DE71F372698005BB1A3 /* domain.pac */,
 				597BC8B71F67F7C500E6B4FF /* config.json */,
@@ -1334,7 +1343,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0830;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = zc;
 				TargetAttributes = {
 					5917E1A41EBB1AF5002F154E = {
@@ -1350,7 +1359,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5917E1A01EBB1AF4002F154E /* Build configuration list for PBXProject "SwiftV2ray" */;
+			buildConfigurationList = 5917E1A01EBB1AF4002F154E /* Build configuration list for PBXProject "SwiftV2Ray" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1374,11 +1383,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59E4C1D61FD40DCA00D6F6B5 /* geosite.dat in Resources */,
+				59E4C1D21FD40DA800D6F6B5 /* v2ctl in Resources */,
 				59C644C71F6D6D2E008581E1 /* SwiftV2ray Preference.app in Resources */,
 				59C644C91F6E0D09008581E1 /* Preference.plist in Resources */,
 				591ECF5D1F3422A9007978EC /* v2ray in Resources */,
 				59704DE81F372698005BB1A3 /* domain.pac in Resources */,
 				5917E1AD1EBB1AF5002F154E /* Assets.xcassets in Resources */,
+				59E4C1D51FD40DCA00D6F6B5 /* geoip.dat in Resources */,
 				5917E1B01EBB1AF5002F154E /* Main.storyboard in Resources */,
 				59704DEE1F372BA0005BB1A3 /* pac-master.pac in Resources */,
 				597BC8B81F67F7C500E6B4FF /* config.json in Resources */,
@@ -1921,7 +1933,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1929,7 +1943,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1971,7 +1989,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -1979,7 +1999,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -2076,7 +2100,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5917E1A01EBB1AF4002F154E /* Build configuration list for PBXProject "SwiftV2ray" */ = {
+		5917E1A01EBB1AF4002F154E /* Build configuration list for PBXProject "SwiftV2Ray" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5917E1B21EBB1AF5002F154E /* Debug */,

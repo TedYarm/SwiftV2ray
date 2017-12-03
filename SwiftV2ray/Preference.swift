@@ -42,7 +42,7 @@ class Preference {
             log.error("Regular expression init failed for deleting comments.")
             return
         }
-        let pureJson = re.stringByReplacingMatches(in: confiStr, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, confiStr.characters.count), withTemplate: "")
+        let pureJson = re.stringByReplacingMatches(in: confiStr, options: NSRegularExpression.MatchingOptions(rawValue: 0), range: NSMakeRange(0, confiStr.count), withTemplate: "")
         
         guard let data = pureJson.data(using: .utf8),
             let dic = (try? JSONSerialization.jsonObject(with: data, options: .allowFragments)) as? [String: Any] else {
